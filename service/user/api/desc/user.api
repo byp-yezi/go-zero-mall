@@ -1,0 +1,31 @@
+import (
+	"login/login.api"
+	"register/register.api"
+	"userinfo/userinfo.api"
+)
+
+@server (
+	prefix: /user/v1
+	group:  user
+)
+service user-api {
+	@doc "用户登录"
+	@handler login
+	post /api/login (LoginRequest) returns (LoginResponse)
+
+	@doc "用户注册"
+	@handler register
+	post /api/register (RegisterRequest) returns (RegisterResponse)
+}
+
+@server (
+	prefix: /user/v1
+	group:  user
+	jwt:    Auth
+)
+service user-api {
+	@doc "用户信息"
+	@handler userinfo
+	post /api/userinfo returns (UserInfoResponse)
+}
+

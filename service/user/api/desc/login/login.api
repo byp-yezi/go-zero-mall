@@ -1,0 +1,11 @@
+type (
+	LoginRequest {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	LoginResponse {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+	}
+)
+
