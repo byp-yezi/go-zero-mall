@@ -40,5 +40,6 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (*user.UserInfoRespon
 		Name:   res.Name,
 		Gender: int64(res.Gender),
 		Mobile: res.Mobile,
+		Password: res.Password,
 	}, nil
 }

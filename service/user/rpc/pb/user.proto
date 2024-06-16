@@ -39,6 +39,7 @@ message UserInfoResponse {
     string Name = 2;
     int64 Gender = 3;
     string Mobile = 4;
+    string Password = 5;
 }
 
 service UserService {

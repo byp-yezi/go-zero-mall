@@ -1,0 +1,86 @@
+package result
+
+import (
+	"context"
+	"fmt"
+	"go-zero-mall/common/errx"
+	"net/http"
+
+	"github.com/pkg/errors"
+	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"google.golang.org/grpc/status"
+)
+
+// http返回
+func HttpResult(ctx context.Context, r *http.Request, w http.ResponseWriter, resp interface{}, err error) {
+
+	if err == nil {
+		//成功返回
+		r := Success(resp)
+		httpx.WriteJsonCtx(ctx, w, http.StatusOK, r)
+	} else {
+		//错误返回
+		errcode := errx.SERVER_COMMON_ERROR
+		errmsg := "服务器开小差啦，稍后再来试一试"
+
+		causeErr := errors.Cause(err)                // err类型
+		fmt.Println("causeErr======================", causeErr)
+		if e, ok := causeErr.(*errx.CodeError); ok { //自定义错误类型
+			//自定义CodeError
+			errcode = e.GetErrCode()
+			errmsg = e.GetErrMsg()
+		} else {
+			if gstatus, ok := status.FromError(causeErr); ok { // grpc err错误
+				grpcCode := uint32(gstatus.Code())
+				if errx.IsCodeErr(grpcCode) { //区分自定义错误跟系统底层、db等错误，底层、db错误不能返回给前端
+					errcode = grpcCode
+					errmsg = gstatus.Message()
+				}
+			}
+		}
+
+		logx.WithContext(ctx).Errorf("【API-ERR】 : %+v ", err)
+
+		httpx.WriteJsonCtx(ctx, w, http.StatusBadRequest, Error(errcode, errmsg))
+	}
+}
+
+//授权的http方法
+func AuthHttpResult(ctx context.Context, r *http.Request, w http.ResponseWriter, resp interface{}, err error) {
+
+	if err == nil {
+		//成功返回
+		r := Success(resp)
+		httpx.WriteJsonCtx(ctx, w, http.StatusOK, r)
+	} else {
+		//错误返回
+		errcode := errx.SERVER_COMMON_ERROR
+		errmsg := "服务器开小差啦，稍后再来试一试"
+
+		causeErr := errors.Cause(err)                // err类型
+		if e, ok := causeErr.(*errx.CodeError); ok { //自定义错误类型
+			//自定义CodeError
+			errcode = e.GetErrCode()
+			errmsg = e.GetErrMsg()
+		} else {
+			if gstatus, ok := status.FromError(causeErr); ok { // grpc err错误
+				grpcCode := uint32(gstatus.Code())
+				if errx.IsCodeErr(grpcCode) { //区分自定义错误跟系统底层、db等错误，底层、db错误不能返回给前端
+					errcode = grpcCode
+					errmsg = gstatus.Message()
+				}
+			}
+		}
+
+		logx.WithContext(ctx).Errorf("【API-ERR】 : %+v ", err)
+
+		httpx.WriteJsonCtx(ctx, w, http.StatusUnauthorized, Error(errcode, errmsg))
+	}
+}
+
+// http 参数错误返回
+func ParamErrorResult(ctx context.Context, w http.ResponseWriter, err error) {
+	errMsg := fmt.Sprintf("%s ,%s", errx.MapErrMsg(errx.REUQEST_PARAM_ERROR), err.Error())
+	httpx.WriteJsonCtx(ctx, w, http.StatusBadRequest, Error(errx.REUQEST_PARAM_ERROR, errMsg))
+}

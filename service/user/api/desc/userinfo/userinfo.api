@@ -4,6 +4,7 @@ type (
 		Name   string `json:"name"`
 		Gender int64  `json:"gender"`
 		Mobile string `json:"mobile"`
+		Password string `json:"password"`
 	}
 )
 

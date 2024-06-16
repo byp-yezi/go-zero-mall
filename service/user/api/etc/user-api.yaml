@@ -7,6 +7,7 @@ UserRpc:
     Hosts:
     - 127.0.0.1:2379
     Key: user.rpc
+  # NonBlock: true
 
 Mysql:
   DataSource: root:root@tcp(127.0.0.1:3306)/gozero_mall?charset=utf8mb4&parseTime=true&loc=Local

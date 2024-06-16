@@ -9,11 +9,15 @@ import (
 	group:  user
 )
 service user-api {
-	@doc "用户登录"
+	@doc (
+		summary: "用户登录"
+	)
 	@handler login
 	post /api/login (LoginRequest) returns (LoginResponse)
 
-	@doc "用户注册"
+	@doc (
+		summary: "用户注册"
+	)
 	@handler register
 	post /api/register (RegisterRequest) returns (RegisterResponse)
 }
@@ -24,7 +28,9 @@ service user-api {
 	jwt:    Auth
 )
 service user-api {
-	@doc "用户信息"
+	@doc (
+		summary: "用户信息"
+	)
 	@handler userinfo
 	post /api/userinfo returns (UserInfoResponse)
 }

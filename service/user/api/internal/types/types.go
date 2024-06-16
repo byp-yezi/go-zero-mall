@@ -26,8 +26,9 @@ type RegisterResponse struct {
 }
 
 type UserInfoResponse struct {
-	Id     int64  `json:"id"`
-	Name   string `json:"name"`
-	Gender int64  `json:"gender"`
-	Mobile string `json:"mobile"`
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	Gender   int64  `json:"gender"`
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
 }

@@ -4,10 +4,13 @@ import (
 	"context"
 
 	"go-zero-mall/common/cryptx"
+	"go-zero-mall/common/errx"
 	"go-zero-mall/service/user/model"
+	"go-zero-mall/service/user/rpc/internal/code"
 	"go-zero-mall/service/user/rpc/internal/svc"
 	"go-zero-mall/service/user/rpc/user"
 
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 	"google.golang.org/grpc/status"
 )
@@ -27,10 +30,13 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 func (l *RegisterLogic) Register(in *user.RegisterRequest) (*user.RegisterResponse, error) {
+	if len(in.Name) == 0 {
+		return nil, code.RegisterNameEmpty
+	}
 	// 判断手机号是否已经注册
 	_, err := l.svcCtx.UserModel.FindOneByMobile(l.ctx, in.Mobile)
 	if err == nil {
-		return nil, status.Error(100, "该用户已存在")
+		return nil, errors.Wrapf(errx.NewErrCode(errx.USER_EXIST_ERROR), "用户已经存在 mobile:%s, err:%v", in.Mobile, err)
 	}
 	if err == model.ErrNotFound {
 		newUser := model.User{
