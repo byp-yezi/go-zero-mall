@@ -29,7 +29,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, err error) {
 	res, err := l.svcCtx.UserRpc.Login(l.ctx, &user.LoginRequest{
-		Mobile: req.Mobile,
+		Mobile:   req.Mobile,
 		Password: req.Password,
 	})
 	if err != nil {
@@ -45,7 +45,7 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, 
 	}
 
 	return &types.LoginResponse{
-		AccessToken: accessToken,
+		AccessToken:  accessToken,
 		AccessExpire: now + accessExpire,
 	}, nil
 }

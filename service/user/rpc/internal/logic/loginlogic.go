@@ -38,7 +38,7 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 	}
 	password := cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password)
 	if password != res.Password {
-		return nil, errors.Wrapf(errx.NewErrCode(errx.PASSWORD_ERROR), "密码错误 err : %+v", err)
+		return nil, errors.Wrapf(errx.NewErrCode(errx.PASSWORD_ERROR), "err : %v", err)
 	}
 
 	return &user.LoginResponse{
