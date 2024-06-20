@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option go_package ="./product";
+
+package product;
+
+// ------------------------------------ 
+// Messages
+// ------------------------------------ 
+
+//--------------------------------product--------------------------------
+message Product {
+  int64 id = 1; //id
+  string name = 2; //产品名称
+  string desc = 3; //产品描述
+  int64 stock = 4; //产品库存
+  int64 amount = 5; //产品金额
+  int64 status = 6; //产品状态
+  int64 createTime = 7; //createTime
+  int64 updateTime = 8; //updateTime
+}
+
+message AddProductReq {
+  string name = 1; //产品名称
+  string desc = 2; //产品描述
+  int64 stock = 3; //产品库存
+  int64 amount = 4; //产品金额
+  int64 status = 5; //产品状态
+}
+
+message AddProductResp {
+}
+
+message UpdateProductReq {
+  int64 id = 1; //id
+  string name = 2; //产品名称
+  string desc = 3; //产品描述
+  int64 stock = 4; //产品库存
+  int64 amount = 5; //产品金额
+  int64 status = 6; //产品状态
+}
+
+message UpdateProductResp {
+}
+
+message DelProductReq {
+  int64 id = 1; //id
+}
+
+message DelProductResp {
+}
+
+message GetProductByIdReq {
+  int64 id = 1; //id
+}
+
+message GetProductByIdResp {
+  Product product = 1; //product
+}
+
+message SearchProductReq {
+  int64 page = 1; //page
+  int64 limit = 2; //limit
+  int64 id = 3; //id
+  string name = 4; //产品名称
+  string desc = 5; //产品描述
+  int64 stock = 6; //产品库存
+  int64 amount = 7; //产品金额
+  int64 status = 8; //产品状态
+  int64 createTime = 9; //createTime
+  int64 updateTime = 10; //updateTime
+}
+
+message SearchProductResp {
+  repeated Product product = 1; //product
+}
+
+
+
+// ------------------------------------ 
+// Rpc Func
+// ------------------------------------ 
+
+service ProductService{ 
+
+	 //-----------------------product----------------------- 
+	 rpc AddProduct(AddProductReq) returns (AddProductResp); 
+	 rpc UpdateProduct(UpdateProductReq) returns (UpdateProductResp); 
+	 rpc DelProduct(DelProductReq) returns (DelProductResp); 
+	 rpc GetProductById(GetProductByIdReq) returns (GetProductByIdResp); 
+	 rpc SearchProduct(SearchProductReq) returns (SearchProductResp); 
+
+}

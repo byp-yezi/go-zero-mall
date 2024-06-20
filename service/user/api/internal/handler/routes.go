@@ -32,9 +32,15 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				// 用户信息
+				// 修改用户信息
 				Method:  http.MethodPost,
 				Path:    "/api/userinfo",
+				Handler: user.UpdateUserinfoHandler(serverCtx),
+			},
+			{
+				// 用户信息
+				Method:  http.MethodGet,
+				Path:    "/api/userinfo/:id",
 				Handler: user.UserinfoHandler(serverCtx),
 			},
 		},
