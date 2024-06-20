@@ -28,9 +28,10 @@ func MapErrMsg(errcode uint32) string {
 }
 
 func IsCodeErr(errcode uint32) bool {
-   if _, ok := message[errcode]; ok {
+   if _, ok := message[errcode]; ok /* || errcode >= 1000 */{
       return true
    } else {
       return false
    }
+   // return errcode >= 1000 && errcode <= 2000
 }

@@ -59,6 +59,7 @@ func AuthHttpResult(ctx context.Context, r *http.Request, w http.ResponseWriter,
 		errmsg := "服务器开小差啦，稍后再来试一试"
 
 		causeErr := errors.Cause(err)                // err类型
+		fmt.Println("causeErr======================", causeErr)
 		if e, ok := causeErr.(*errx.CodeError); ok { //自定义错误类型
 			//自定义CodeError
 			errcode = e.GetErrCode()

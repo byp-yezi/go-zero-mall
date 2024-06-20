@@ -16,12 +16,12 @@ func LoggerInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo,
 	if err != nil {
 		causeErr := errors.Cause(err)
 		if e, ok := causeErr.(*errx.CodeError); ok {
-			logx.WithContext(ctx).Errorf("【RPC-SRV-ERR】 %+v", err)
+			logx.WithContext(ctx).Errorf("【RPC-SRV-ERR-1】 %+v", err)
 
 			//转成grpc err
 			err = status.Error(codes.Code(e.GetErrCode()), e.GetErrMsg())
 		} else {
-			logx.WithContext(ctx).Errorf("【RPC-SRV-ERR】 %+v", err)
+			logx.WithContext(ctx).Errorf("【RPC-SRV-ERR-2】 %+v", err)
 		}
 	}
 	return resp, err
