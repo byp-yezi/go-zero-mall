@@ -32,6 +32,12 @@ service user-api {
 		summary: "用户信息"
 	)
 	@handler userinfo
-	post /api/userinfo returns (UserInfoResponse)
+	get /api/userinfo/:id (UserInfoRequest) returns (UserInfoResponse)
+
+	@doc (
+		summary: "修改用户信息"
+	)
+	@handler updateUserinfo
+	post /api/userinfo (UpdateInfoRequest) returns (UserInfoResponse)
 }
 

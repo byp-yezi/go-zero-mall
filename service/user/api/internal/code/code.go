@@ -18,4 +18,5 @@ var (
 var (
 	ErrUserAlreadyRegister = errx.NewErrCodeMsg(20001, "该用户已注册-api")
 	ErrGenderOnlyOneOrTwo  = errx.NewErrCodeMsg(20002, "Gender的值只能是0或1")
+	ErrUserIdNotExist      = errx.NewErrCodeMsg(20003, "请求的用户id和登录id不同")
 )

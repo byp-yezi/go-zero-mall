@@ -1,7 +1,7 @@
 type (
 	RegisterRequest {
 		Name     string `json:"name"`
-		Gender   int64  `json:"gender"`
+		Gender   int64  `json:"gender,options=[0,1]"`
 		Mobile   string `json:"mobile"`
 		Password string `json:"password"`
 	}

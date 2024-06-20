@@ -44,18 +44,31 @@ type (
 )
 
 @server (
-	jwt: Auth
+	prefix: /user/v1
+	jwt:    Auth
 )
 service Product {
+	@doc (
+		summary: "产品创建"
+	)
 	@handler Create
 	post /api/product/create (CreateRequest) returns (CreateResponse)
 
+	@doc (
+		summary: "产品修改"
+	)
 	@handler Update
 	post /api/product/update (UpdateRequest) returns (UpdateResponse)
 
+	@doc (
+		summary: "产品删除"
+	)
 	@handler Remove
 	post /api/product/remove (RemoveRequest) returns (RemoveResponse)
 
+	@doc (
+		summary: "产品详情"
+	)
 	@handler Detail
 	post /api/product/detail (DetailRequest) returns (DetailResponse)
 }

@@ -15,6 +15,8 @@ func init() {
 
    // 用户模块
    message[USER_EXIST_ERROR] = "该用户已注册-rpc"
+   message[USER_NOTEXIST_ERROR] = "该用户不存在-rpc"
+   message[PASSWORD_ERROR] = "密码错误-rpc"
 }
 
 func MapErrMsg(errcode uint32) string {

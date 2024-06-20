@@ -4,12 +4,13 @@ import (
 	"context"
 
 	"go-zero-mall/common/cryptx"
+	"go-zero-mall/common/errx"
 	"go-zero-mall/service/user/model"
 	"go-zero-mall/service/user/rpc/internal/svc"
 	"go-zero-mall/service/user/rpc/user"
 
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
-	"google.golang.org/grpc/status"
 )
 
 type LoginLogic struct {
@@ -31,13 +32,13 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 	res, err := l.svcCtx.UserModel.FindOneByMobile(l.ctx, in.Mobile)
 	if err != nil {
 		if err == model.ErrNotFound {
-			return nil, status.Error(100, "用户不存在")
+			return nil, errors.Wrapf(errx.NewErrCode(errx.USER_NOTEXIST_ERROR), "Login FindOneByMobile 用户不存在 in : %+v, err : %+v", in, err)
 		}
-		return nil, status.Error(500, err.Error())
+		return nil, errors.Wrapf(errx.NewErrCode(errx.DB_ERROR), "Login FindOneByMobile db err : %v, in : %+v", err, in)
 	}
 	password := cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password)
 	if password != res.Password {
-		return nil, status.Error(100, "密码错误")
+		return nil, errors.Wrapf(errx.NewErrCode(errx.PASSWORD_ERROR), "密码错误 err : %+v", err)
 	}
 
 	return &user.LoginResponse{

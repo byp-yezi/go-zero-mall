@@ -1,9 +1,19 @@
 type (
+	UserInfoRequest {
+		Id int64 `path:"id"`
+	}
+	UpdateInfoRequest {
+		Id       int64  `json:"id"`
+		Name     string `json:"name"`
+		Gender   int64  `json:"gender"`
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
 	UserInfoResponse {
-		Id     int64  `json:"id"`
-		Name   string `json:"name"`
-		Gender int64  `json:"gender"`
-		Mobile string `json:"mobile"`
+		Id       int64  `json:"id"`
+		Name     string `json:"name"`
+		Gender   int64  `json:"gender"`
+		Mobile   string `json:"mobile"`
 		Password string `json:"password"`
 	}
 )

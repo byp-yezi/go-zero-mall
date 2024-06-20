@@ -42,8 +42,18 @@ message UserInfoResponse {
     string Password = 5;
 }
 
+//用户更新
+message UpdateInfoRequest {
+    int64 Id = 1;
+    string Name = 2;
+    int64 Gender = 3;
+    string Mobile = 4;
+    string Password = 5;
+}
+
 service UserService {
     rpc Login(LoginRequest) returns(LoginResponse);
     rpc Register(RegisterRequest) returns(RegisterResponse);
     rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
+    rpc updateUserinfo(UpdateInfoRequest) returns(UserInfoResponse);
 }

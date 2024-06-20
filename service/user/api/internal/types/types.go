@@ -13,7 +13,7 @@ type LoginResponse struct {
 
 type RegisterRequest struct {
 	Name     string `json:"name"`
-	Gender   int64  `json:"gender"`
+	Gender   int64  `json:"gender,options=[0,1]"`
 	Mobile   string `json:"mobile"`
 	Password string `json:"password"`
 }
@@ -23,6 +23,18 @@ type RegisterResponse struct {
 	Name   string `json:"name"`
 	Gender int64  `json:"gender"`
 	Mobile string `json:"mobile"`
+}
+
+type UpdateInfoRequest struct {
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	Gender   int64  `json:"gender"`
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
+}
+
+type UserInfoRequest struct {
+	Id int64 `path:"id"`
 }
 
 type UserInfoResponse struct {
