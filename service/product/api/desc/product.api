@@ -44,7 +44,7 @@ type (
 )
 
 @server (
-	prefix: /user/v1
+	prefix: /product/v1
 	jwt:    Auth
 )
 service Product {

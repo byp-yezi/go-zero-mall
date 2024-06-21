@@ -38,7 +38,7 @@ func (l *AddProductLogic) AddProduct(in *product.AddProductReq) (*product.AddPro
 
 	res, err := l.svcCtx.ProductModel.Insert(l.ctx, &newProduct)
 	if err != nil {
-		return nil, errors.Wrapf(errx.NewErrCodeMsg(11001, "产品创建失败"), "err : %+v", err)
+		return nil, errors.Wrapf(errx.NewErrCode(errx.CREATE_PRODUCT_ERROR), "err : %+v", err)
 	}
 	newProductId, err := res.LastInsertId()
 	if err != nil {

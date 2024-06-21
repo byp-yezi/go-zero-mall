@@ -5,6 +5,7 @@ import (
 
 	"go-zero-mall/service/product/api/internal/svc"
 	"go-zero-mall/service/product/api/internal/types"
+	"go-zero-mall/service/product/rpc/pb/product"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,7 +26,19 @@ func NewDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DetailLogi
 }
 
 func (l *DetailLogic) Detail(req *types.DetailRequest) (resp *types.DetailResponse, err error) {
-	// todo: add your logic here and delete this line
+	res, err := l.svcCtx.ProductRpc.GetProductById(l.ctx, &product.GetProductByIdReq{
+		Id: req.Id,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.DetailResponse{
+		Id: res.Product.Id,
+		Name: res.Product.Name,
+		Desc: res.Product.Desc,
+		Stock: res.Product.Stock,
+		Amount: res.Product.Amount,
+		Status: res.Product.Status,
+	}, nil
 }

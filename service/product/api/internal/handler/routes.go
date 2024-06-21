@@ -38,6 +38,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/user/v1"),
+		rest.WithPrefix("/product/v1"),
 	)
 }

@@ -21,5 +21,6 @@ const (
 
 //产品模块
 const (
-
+	CREATE_PRODUCT_ERROR uint32 = iota + 11001
+	GET_PRODUCT_BY_ID_ERROR
 )

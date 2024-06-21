@@ -29,6 +29,7 @@ message AddProductReq {
 }
 
 message AddProductResp {
+  int64 id = 1; //id
 }
 
 message UpdateProductReq {
