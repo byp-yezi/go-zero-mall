@@ -62,14 +62,14 @@ message GetProductByIdResp {
 message SearchProductReq {
   int64 page = 1; //page
   int64 limit = 2; //limit
-  int64 id = 3; //id
-  string name = 4; //产品名称
-  string desc = 5; //产品描述
-  int64 stock = 6; //产品库存
-  int64 amount = 7; //产品金额
-  int64 status = 8; //产品状态
-  int64 createTime = 9; //createTime
-  int64 updateTime = 10; //updateTime
+  // int64 id = 3; //id
+  // string name = 4; //产品名称
+  // string desc = 5; //产品描述
+  // int64 stock = 6; //产品库存
+  // int64 amount = 7; //产品金额
+  // int64 status = 8; //产品状态
+  // int64 createTime = 9; //createTime
+  // int64 updateTime = 10; //updateTime
 }
 
 message SearchProductResp {

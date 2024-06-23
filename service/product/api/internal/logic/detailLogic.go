@@ -3,10 +3,13 @@ package logic
 import (
 	"context"
 
+	"go-zero-mall/common/errx"
 	"go-zero-mall/service/product/api/internal/svc"
 	"go-zero-mall/service/product/api/internal/types"
 	"go-zero-mall/service/product/rpc/pb/product"
 
+	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -33,12 +36,15 @@ func (l *DetailLogic) Detail(req *types.DetailRequest) (resp *types.DetailRespon
 		return nil, err
 	}
 
+	var typeProductDetail types.DetailResponse
+	if res != nil {
+		err = copier.Copy(&typeProductDetail, res)
+		if err != nil {
+			return nil, errors.Wrapf(errx.NewErrCode(errx.SERVER_COMMON_ERROR), "GetProductById copier err:%v", err)
+		}
+	}
+
 	return &types.DetailResponse{
-		Id: res.Product.Id,
-		Name: res.Product.Name,
-		Desc: res.Product.Desc,
-		Stock: res.Product.Stock,
-		Amount: res.Product.Amount,
-		Status: res.Product.Status,
+		Product: typeProductDetail.Product,
 	}, nil
 }

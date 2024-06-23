@@ -1,0 +1,26 @@
+Name: order.rpc
+ListenOn: 0.0.0.0:9002
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: order.rpc
+
+UserRpc:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: user.rpc
+
+ProductRpc:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: product.rpc
+
+Mysql:
+  DataSource: root:root@tcp(127.0.0.1:3306)/gozero_mall?charset=utf8mb4&parseTime=true&loc=Local
+
+CacheRedis:
+- Host: 127.0.0.1:6379
+  Type: node
+  Pass: "123456"

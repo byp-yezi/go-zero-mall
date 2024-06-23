@@ -18,9 +18,17 @@ func init() {
    message[USER_NOTEXIST_ERROR] = "该用户不存在-rpc"
    message[PASSWORD_ERROR] = "密码错误-rpc"
 
-   //产品模块
+   // 产品模块
    message[CREATE_PRODUCT_ERROR] = "产品创建失败"
    message[GET_PRODUCT_BY_ID_ERROR] = "通过id获取产品失败"
+   message[STOCK_INSUFFICIENT_ERROR] = "产品库存不足"
+   message[STOCK_REDUCE_ERROR] = "产品库存减少失败"
+
+   // 订单模块
+   message[CREATE_ORDER_ERROR] = "订单创建失败"
+   message[ORDER_NOTEXIST_ERROR] = "订单不存在"
+   message[ORDER_UPDATE_ERROR] = "订单更新失败"
+   message[ORDER_DELETE_ERROR] = "订单删除失败"
 }
 
 func MapErrMsg(errcode uint32) string {

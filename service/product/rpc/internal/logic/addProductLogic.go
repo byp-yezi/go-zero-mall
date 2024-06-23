@@ -44,7 +44,9 @@ func (l *AddProductLogic) AddProduct(in *product.AddProductReq) (*product.AddPro
 	if err != nil {
 		return nil, errors.Wrapf(errx.NewErrMsg("产品id赋值失败"), "err : %+v", err)
 	}
-	newProduct.Id = uint64(newProductId)
+	// newProduct.Id = uint64(newProductId)
 
-	return &product.AddProductResp{}, nil
+	return &product.AddProductResp{
+		Id: newProductId,
+	}, nil
 }

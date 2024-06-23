@@ -1,0 +1,86 @@
+type (
+	Order {
+		Id         int64 `json:"id"`
+		Uid        int64 `json:"uid"`
+		Pid        int64 `json:"pid"`
+		Amount     int64 `json:"amount"`
+		Status     int64 `json:"status"`
+		CreateTime int64 `json:"create_time"`
+		UpdateTime int64 `json:"update_time"`
+	}
+	// 订单创建
+	CreateRequest {
+		Uid    int64 `json:"uid"`
+		Pid    int64 `json:"pid"`
+		Amount int64 `json:"amount"`
+		Status int64 `json:"status"`
+	}
+	CreateResponse {
+		Id int64 `json:"id"`
+	}
+	// 订单修改
+	UpdateRequest {
+		Id     int64 `json:"id"`
+		Uid    int64 `json:"uid"`
+		Pid    int64 `json:"pid"`
+		Amount int64 `json:"amount"`
+		Status int64 `json:"status"`
+	}
+	UpdateResponse  {}
+	// 订单删除
+	RemoveRequest {
+		Id int64 `json:"id"`
+	}
+	RemoveResponse  {}
+	// 订单详情
+	DetailRequest {
+		Id int64 `json:"id"`
+	}
+	DetailResponse {
+		Order Order `json:"order_detail"`
+	}
+	// 订单列表
+	ListRequest {
+		Uid int64 `json:"uid"`
+	}
+	ListResponse {
+		Orders []Order `json:"order_list"`
+	}
+)
+
+@server (
+	prefix: /order/v1
+	jwt:    Auth
+)
+service Order {
+	@doc (
+		summary: "订单创建"
+	)
+	@handler Create
+	post /api/order/create (CreateRequest) returns (CreateResponse)
+
+	@doc (
+		summary: "订单更新"
+	)
+	@handler Update
+	post /api/order/update (UpdateRequest) returns (UpdateResponse)
+
+	@doc (
+		summary: "订单删除"
+	)
+	@handler Remove
+	post /api/order/remove (RemoveRequest) returns (RemoveResponse)
+
+	@doc (
+		summary: "订单详情"
+	)
+	@handler Detail
+	post /api/order/detail (DetailRequest) returns (DetailResponse)
+
+	@doc (
+		summary: "订单列表"
+	)
+	@handler List
+	post /api/order/list (ListRequest) returns (ListResponse)
+}
+

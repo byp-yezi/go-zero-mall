@@ -6,6 +6,7 @@ import (
 
 	"go-zero-mall/common/result"
 
+	"github.com/zeromicro/go-zero/core/logx"
 	{{.importPackages}}
 )
 
@@ -24,5 +25,6 @@ func main() {
 	handler.RegisterHandlers(server, ctx)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+	logx.DisableStat()
 	server.Start()
 }

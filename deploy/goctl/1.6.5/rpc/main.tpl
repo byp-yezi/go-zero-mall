@@ -7,6 +7,7 @@ import (
 	{{.imports}}
 	"go-zero-mall/common/interceptors/rpcserver"
 
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -37,5 +38,6 @@ func main() {
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
+	logx.DisableStat()
 	s.Start()
 }

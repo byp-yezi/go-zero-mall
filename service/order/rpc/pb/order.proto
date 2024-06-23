@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+option go_package ="./order";
+
+package order;
+
+// ------------------------------------ 
+// Messages
+// ------------------------------------ 
+
+//--------------------------------order--------------------------------
+message Order {
+  int64 id = 1; //id
+  int64 uid = 2; //用户ID
+  int64 pid = 3; //产品ID
+  int64 amount = 4; //订单金额
+  int64 status = 5; //订单状态
+  int64 createTime = 6; //createTime
+  int64 updateTime = 7; //updateTime
+}
+
+message AddOrderReq {
+  int64 uid = 1; //用户ID
+  int64 pid = 2; //产品ID
+  int64 amount = 3; //订单金额
+  int64 status = 4; //订单状态
+}
+
+message AddOrderResp {
+  int64 id = 1; //id
+}
+
+message UpdateOrderReq {
+  int64 id = 1; //id
+  int64 uid = 2; //用户ID
+  int64 pid = 3; //产品ID
+  int64 amount = 4; //订单金额
+  int64 status = 5; //订单状态
+}
+
+message UpdateOrderResp {
+}
+
+message DelOrderReq {
+  int64 id = 1; //id
+}
+
+message DelOrderResp {
+}
+
+message GetOrderByIdReq {
+  int64 id = 1; //id
+}
+
+message GetOrderByIdResp {
+  Order order = 1; //order
+}
+
+message SearchOrderReq {
+  int64 page = 1; //page
+  int64 limit = 2; //limit
+  int64 id = 3; //id
+  int64 uid = 4; //用户ID
+  int64 pid = 5; //产品ID
+  int64 amount = 6; //订单金额
+  int64 status = 7; //订单状态
+  int64 createTime = 8; //createTime
+  int64 updateTime = 9; //updateTime
+}
+
+message SearchOrderResp {
+  repeated Order order = 1; //order
+}
+
+// 订单列表
+message ListRequest {
+  int64 uid = 1;
+}
+message ListResp {
+  repeated Order order = 1; //order
+}
+
+// 订单支付
+message PaidReq {
+  int64 id = 1;
+}
+message PaidResp {}
+
+
+// ------------------------------------ 
+// Rpc Func
+// ------------------------------------ 
+
+service ordersrv{ 
+
+	 //-----------------------order----------------------- 
+	 rpc AddOrder(AddOrderReq) returns (AddOrderResp); 
+	 rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderResp); 
+	 rpc DelOrder(DelOrderReq) returns (DelOrderResp); 
+	 rpc GetOrderById(GetOrderByIdReq) returns (GetOrderByIdResp); 
+	 rpc SearchOrder(SearchOrderReq) returns (SearchOrderResp); 
+   rpc ListOrder(ListRequest) returns (ListResp);
+   rpc PaidOrder(PaidReq) returns (PaidResp);
+}

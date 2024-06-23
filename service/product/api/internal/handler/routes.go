@@ -25,6 +25,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: DetailHandler(serverCtx),
 			},
 			{
+				// 产品列表
+				Method:  http.MethodPost,
+				Path:    "/api/product/list",
+				Handler: ListHandler(serverCtx),
+			},
+			{
 				// 产品删除
 				Method:  http.MethodPost,
 				Path:    "/api/product/remove",

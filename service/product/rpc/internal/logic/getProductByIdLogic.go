@@ -41,6 +41,8 @@ func (l *GetProductByIdLogic) GetProductById(in *product.GetProductByIdReq) (*pr
 	if err != nil {
 		return nil, errors.Wrapf(errx.NewErrCode(errx.SERVER_COMMON_ERROR), "GetProductById copier err:%v", err)
 	}
+	resProduct.CreateTime = res.CreateTime.Unix()
+	resProduct.UpdateTime = res.UpdateTime.Unix()
 
 	return &product.GetProductByIdResp{
 		Product: &resProduct,

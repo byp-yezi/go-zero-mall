@@ -18,12 +18,27 @@ type DetailRequest struct {
 }
 
 type DetailResponse struct {
-	Id     int64  `json:"id"`
-	Name   string `json:"name"`
-	Desc   string `json:"desc"`
-	Stock  int64  `json:"stock"`
-	Amount int64  `json:"amount"`
-	Status int64  `json:"status"`
+	Product Product `json:"product"`
+}
+
+type ListRequest struct {
+	Page  int64 `json:"page"`
+	Limit int64 `json:"limit"`
+}
+
+type ListResponse struct {
+	Products []Product `json:"productlist"`
+}
+
+type Product struct {
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`
+	Desc       string `json:"desc"`
+	Stock      int64  `json:"stock"`
+	Amount     int64  `json:"amount"`
+	Status     int64  `json:"status"`
+	CreateTime int64  `json:"create_time"`
+	UpdateTime int64  `json:"update_time"`
 }
 
 type RemoveRequest struct {
