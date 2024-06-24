@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package ="./pay";
+
+package pay;
+
+// ------------------------------------ 
+// Messages
+// ------------------------------------ 
+
+//--------------------------------pay--------------------------------
+message Pay {
+  int64 id = 1; //id
+  int64 uid = 2; //用户ID
+  int64 oid = 3; //订单ID
+  int64 amount = 4; //产品金额
+  int64 source = 5; //支付方式
+  int64 status = 6; //支付状态
+  int64 createTime = 7; //createTime
+  int64 updateTime = 8; //updateTime
+}
+
+message AddPayReq {
+  int64 uid = 1; //用户ID
+  int64 oid = 2; //订单ID
+  int64 amount = 3; //产品金额
+}
+
+message AddPayResp {
+  int64 id = 1;
+}
+
+message DetailReq {
+  int64 id = 1; //id
+}
+
+message DetailResp {
+  Pay pay = 1; //pay
+}
+
+message CallbackReq {
+  Pay pay = 1; //pay
+}
+
+message CallbackResp {
+}
+
+
+
+// ------------------------------------ 
+// Rpc Func
+// ------------------------------------ 
+
+service PayService{ 
+
+	 //-----------------------pay----------------------- 
+	 rpc AddPay(AddPayReq) returns (AddPayResp); 
+	 rpc GetPayById(DetailReq) returns (DetailResp); 
+	 rpc Callback(CallbackReq) returns (CallbackResp); 
+
+}
