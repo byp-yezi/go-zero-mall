@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"go-zero-mall/common/errx"
 	"go-zero-mall/service/order/model"
@@ -52,7 +51,6 @@ func (l *ListOrderLogic) ListOrder(in *order.ListRequest) (*order.ListResp, erro
 	if len(list) > 0 {
 		mr.MapReduceVoid(func(source chan<- interface{}) {
 			for _, order := range list {
-				fmt.Println("order.Id=====================", order.Id)
 				source <- order.Id
 			}
 		}, func(item interface{}, writer mr.Writer[*model.Order], cancel func(error)) {

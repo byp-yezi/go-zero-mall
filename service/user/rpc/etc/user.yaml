@@ -14,3 +14,9 @@ CacheRedis:
   Pass: "123456"
 
 Salt: HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe
+
+Telemetry:
+  Name: user.rpc
+  Endpoint: http://192.168.11.20:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger

@@ -29,6 +29,10 @@ func init() {
    message[ORDER_NOTEXIST_ERROR] = "订单不存在"
    message[ORDER_UPDATE_ERROR] = "订单更新失败"
    message[ORDER_DELETE_ERROR] = "订单删除失败"
+   message[ORDER_ALREADY_CREATE_FOR_PAY_ERROR] = "已创建过付款订单"
+
+   // 支付模块
+   message[CREATE_PAY_ERROR] = "支付创建失败"
 }
 
 func MapErrMsg(errcode uint32) string {

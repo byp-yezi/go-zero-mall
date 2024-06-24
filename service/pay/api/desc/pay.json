@@ -1,0 +1,243 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pay/v1/api/pay/callback": {
+      "post": {
+        "summary": "支付回调",
+        "operationId": "Callback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CallbackResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " 支付回调",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CallbackRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Pay"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/pay/v1/api/pay/create": {
+      "post": {
+        "summary": "支付创建",
+        "operationId": "Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CreateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " 支付创建",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Pay"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/pay/v1/api/pay/detail": {
+      "post": {
+        "summary": "支付详情",
+        "operationId": "Detail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/DetailResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " 支付详情",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Pay"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CallbackRequest": {
+      "type": "object",
+      "properties": {
+        "pay": {
+          "$ref": "#/definitions/Pay"
+        }
+      },
+      "title": "CallbackRequest",
+      "required": [
+        "pay"
+      ]
+    },
+    "CallbackResponse": {
+      "type": "object",
+      "title": "CallbackResponse"
+    },
+    "CreateRequest": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "oid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateRequest",
+      "required": [
+        "uid",
+        "oid",
+        "amount"
+      ]
+    },
+    "CreateResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "CreateResponse",
+      "required": [
+        "id"
+      ]
+    },
+    "DetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "DetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DetailResponse": {
+      "type": "object",
+      "properties": {
+        "pay": {
+          "$ref": "#/definitions/Pay"
+        }
+      },
+      "title": "DetailResponse",
+      "required": [
+        "pay"
+      ]
+    },
+    "Pay": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "uid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "oid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "source": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Pay",
+      "required": [
+        "id",
+        "uid",
+        "oid",
+        "amount",
+        "source",
+        "status"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
