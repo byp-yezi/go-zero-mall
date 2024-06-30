@@ -76,6 +76,12 @@ message SearchProductResp {
   repeated Product product = 1; //product
 }
 
+message DecrStockReq {
+  int64 id = 1;
+  int64 num = 2;
+}
+
+message DecrStockResp {}
 
 
 // ------------------------------------ 
@@ -90,5 +96,7 @@ service ProductService{
 	 rpc DelProduct(DelProductReq) returns (DelProductResp); 
 	 rpc GetProductById(GetProductByIdReq) returns (GetProductByIdResp); 
 	 rpc SearchProduct(SearchProductReq) returns (SearchProductResp); 
+   rpc DecrStock(DecrStockReq) returns (DecrStockResp);
+   rpc DecrStockRevert(DecrStockReq) returns (DecrStockResp);
 
 }

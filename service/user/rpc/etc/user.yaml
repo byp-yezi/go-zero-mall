@@ -2,7 +2,7 @@ Name: user.rpc
 ListenOn: 0.0.0.0:9000
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - 192.168.0.111:2379
   Key: user.rpc
 
 Mysql:
@@ -17,6 +17,6 @@ Salt: HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe
 
 Telemetry:
   Name: user.rpc
-  Endpoint: http://192.168.11.20:14268/api/traces
+  Endpoint: http://192.168.11.11:14268/api/traces
   Sampler: 1.0
   Batcher: jaeger

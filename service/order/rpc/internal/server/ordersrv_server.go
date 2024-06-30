@@ -28,6 +28,11 @@ func (s *OrdersrvServer) AddOrder(ctx context.Context, in *order.AddOrderReq) (*
 	return l.AddOrder(in)
 }
 
+func (s *OrdersrvServer) AddOrderRevert(ctx context.Context, in *order.AddOrderReq) (*order.AddOrderResp, error) {
+	l := logic.NewAddOrderRevertLogic(ctx, s.svcCtx)
+	return l.AddOrderRevert(in)
+}
+
 func (s *OrdersrvServer) UpdateOrder(ctx context.Context, in *order.UpdateOrderReq) (*order.UpdateOrderResp, error) {
 	l := logic.NewUpdateOrderLogic(ctx, s.svcCtx)
 	return l.UpdateOrder(in)

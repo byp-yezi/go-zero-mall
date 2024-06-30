@@ -3,6 +3,7 @@ module go-zero-mall
 go 1.22.2
 
 require (
+	github.com/Masterminds/squirrel v1.5.4
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.9.0
@@ -13,9 +14,44 @@ require (
 )
 
 require (
-	github.com/Masterminds/squirrel v1.5.4 // indirect
+	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1620 // indirect
+	github.com/armon/go-metrics v0.4.0 // indirect
+	github.com/buger/jsonparser v1.1.1 // indirect
+	github.com/dtm-labs/dtmdriver v0.0.6 // indirect
+	github.com/dtm-labs/dtmdriver-gozero v0.0.7 // indirect
+	github.com/dtm-labs/logger v0.0.1 // indirect
+	github.com/go-errors/errors v1.4.2 // indirect
+	github.com/go-redis/redis/v8 v8.11.5 // indirect
+	github.com/go-resty/resty/v2 v2.7.0 // indirect
+	github.com/golang/snappy v0.0.4 // indirect
+	github.com/hashicorp/consul/api v1.13.0 // indirect
+	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
+	github.com/hashicorp/go-hclog v1.2.0 // indirect
+	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
+	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
+	github.com/hashicorp/golang-lru v0.5.4 // indirect
+	github.com/hashicorp/serf v0.9.8 // indirect
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/jpillora/backoff v1.0.0 // indirect
+	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
 	github.com/lann/ps v0.0.0-20150810152359-62de8c46ede0 // indirect
+	github.com/mitchellh/go-homedir v1.1.0 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
+	github.com/nacos-group/nacos-sdk-go v1.1.1 // indirect
+	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
+	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
+	github.com/xdg-go/scram v1.1.2 // indirect
+	github.com/xdg-go/stringprep v1.0.4 // indirect
+	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
+	// github.com/zeromicro/zero-contrib/zrpc/registry/consul v0.0.0-20220228111653-d672d81f39ab // indirect
+	github.com/zeromicro/zero-contrib/zrpc/registry/consul v0.0.0-20221119154608-12cfed75fa7c // indirect
+	github.com/zeromicro/zero-contrib/zrpc/registry/nacos v0.0.0-20220525162615-f10f16d580d6 // indirect
+	go.mongodb.org/mongo-driver v1.13.1 // indirect
+	golang.org/x/sync v0.7.0 // indirect
+	gopkg.in/ini.v1 v1.66.6 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 )
 
 require (
@@ -27,6 +63,8 @@ require (
 	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/dtm-labs/client v1.18.7
+	github.com/dtm-labs/driver-gozero v0.0.7
 	github.com/emicklei/go-restful/v3 v3.11.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/go-logr/logr v1.3.0 // indirect

@@ -8,6 +8,6 @@ import (
 )
 
 func TestPasswordCrypt(t *testing.T) {
-	output := cryptx.PasswordEncrypt("123", "789")
-	assert.Equal(t, "ebea6eb394c06d2800241cecbaa231f7b09edc65bec40cc4b429e8d62b1b5e23", output)
+	output := cryptx.PasswordEncrypt("HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe", "123456")
+	assert.Equal(t, "ef8364020560a703cfc7aebebcd0b62d1bfea7d4a841eb8964cfbcda2ba85dd5", output)
 }

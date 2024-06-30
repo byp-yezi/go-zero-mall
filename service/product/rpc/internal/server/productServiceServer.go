@@ -47,3 +47,13 @@ func (s *ProductServiceServer) SearchProduct(ctx context.Context, in *product.Se
 	l := logic.NewSearchProductLogic(ctx, s.svcCtx)
 	return l.SearchProduct(in)
 }
+
+func (s *ProductServiceServer) DecrStock(ctx context.Context, in *product.DecrStockReq) (*product.DecrStockResp, error) {
+	l := logic.NewDecrStockLogic(ctx, s.svcCtx)
+	return l.DecrStock(in)
+}
+
+func (s *ProductServiceServer) DecrStockRevert(ctx context.Context, in *product.DecrStockReq) (*product.DecrStockResp, error) {
+	l := logic.NewDecrStockRevertLogic(ctx, s.svcCtx)
+	return l.DecrStockRevert(in)
+}

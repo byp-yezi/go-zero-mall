@@ -27,7 +27,7 @@ message AddOrderReq {
 }
 
 message AddOrderResp {
-  int64 id = 1; //id
+  // int64 id = 1; //id
 }
 
 message UpdateOrderReq {
@@ -95,6 +95,7 @@ service ordersrv{
 
 	 //-----------------------order----------------------- 
 	 rpc AddOrder(AddOrderReq) returns (AddOrderResp); 
+	 rpc AddOrderRevert(AddOrderReq) returns (AddOrderResp); 
 	 rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderResp); 
 	 rpc DelOrder(DelOrderReq) returns (DelOrderResp); 
 	 rpc GetOrderById(GetOrderByIdReq) returns (GetOrderByIdResp); 

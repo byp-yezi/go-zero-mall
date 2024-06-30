@@ -32,6 +32,7 @@ type (
 	Ordersrv interface {
 		// -----------------------order-----------------------
 		AddOrder(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error)
+		AddOrderRevert(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error)
 		UpdateOrder(ctx context.Context, in *UpdateOrderReq, opts ...grpc.CallOption) (*UpdateOrderResp, error)
 		DelOrder(ctx context.Context, in *DelOrderReq, opts ...grpc.CallOption) (*DelOrderResp, error)
 		GetOrderById(ctx context.Context, in *GetOrderByIdReq, opts ...grpc.CallOption) (*GetOrderByIdResp, error)
@@ -55,6 +56,11 @@ func NewOrdersrv(cli zrpc.Client) Ordersrv {
 func (m *defaultOrdersrv) AddOrder(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error) {
 	client := order.NewOrdersrvClient(m.cli.Conn())
 	return client.AddOrder(ctx, in, opts...)
+}
+
+func (m *defaultOrdersrv) AddOrderRevert(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error) {
+	client := order.NewOrdersrvClient(m.cli.Conn())
+	return client.AddOrderRevert(ctx, in, opts...)
 }
 
 func (m *defaultOrdersrv) UpdateOrder(ctx context.Context, in *UpdateOrderReq, opts ...grpc.CallOption) (*UpdateOrderResp, error) {

@@ -2,20 +2,20 @@ Name: pay.rpc
 ListenOn: 0.0.0.0:9003
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - 192.168.0.111:2379
   Key: pay.rpc
 
 UserRpc:
   Etcd:
     Hosts:
-    - 127.0.0.1:2379
+    - 192.168.0.111:2379
     Key: user.rpc
   NonBlock: true
 
 OrderRpc:
   Etcd:
     Hosts:
-    - 127.0.0.1:2379
+    - 192.168.0.111:2379
     Key: order.rpc
   NonBlock: true
 
@@ -29,6 +29,6 @@ CacheRedis:
 
 Telemetry:
   Name: pay.rpc
-  Endpoint: http://192.168.11.20:14268/api/traces
+  Endpoint: http://192.168.11.11:14268/api/traces
   Sampler: 1.0
   Batcher: jaeger

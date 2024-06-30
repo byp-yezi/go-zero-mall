@@ -15,6 +15,8 @@ import (
 type (
 	AddProductReq      = product.AddProductReq
 	AddProductResp     = product.AddProductResp
+	DecrStockReq       = product.DecrStockReq
+	DecrStockResp      = product.DecrStockResp
 	DelProductReq      = product.DelProductReq
 	DelProductResp     = product.DelProductResp
 	GetProductByIdReq  = product.GetProductByIdReq
@@ -32,6 +34,8 @@ type (
 		DelProduct(ctx context.Context, in *DelProductReq, opts ...grpc.CallOption) (*DelProductResp, error)
 		GetProductById(ctx context.Context, in *GetProductByIdReq, opts ...grpc.CallOption) (*GetProductByIdResp, error)
 		SearchProduct(ctx context.Context, in *SearchProductReq, opts ...grpc.CallOption) (*SearchProductResp, error)
+		DecrStock(ctx context.Context, in *DecrStockReq, opts ...grpc.CallOption) (*DecrStockResp, error)
+		DecrStockRevert(ctx context.Context, in *DecrStockReq, opts ...grpc.CallOption) (*DecrStockResp, error)
 	}
 
 	defaultProductService struct {
@@ -69,4 +73,14 @@ func (m *defaultProductService) GetProductById(ctx context.Context, in *GetProdu
 func (m *defaultProductService) SearchProduct(ctx context.Context, in *SearchProductReq, opts ...grpc.CallOption) (*SearchProductResp, error) {
 	client := product.NewProductServiceClient(m.cli.Conn())
 	return client.SearchProduct(ctx, in, opts...)
+}
+
+func (m *defaultProductService) DecrStock(ctx context.Context, in *DecrStockReq, opts ...grpc.CallOption) (*DecrStockResp, error) {
+	client := product.NewProductServiceClient(m.cli.Conn())
+	return client.DecrStock(ctx, in, opts...)
+}
+
+func (m *defaultProductService) DecrStockRevert(ctx context.Context, in *DecrStockReq, opts ...grpc.CallOption) (*DecrStockResp, error) {
+	client := product.NewProductServiceClient(m.cli.Conn())
+	return client.DecrStockRevert(ctx, in, opts...)
 }

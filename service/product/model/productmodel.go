@@ -2,6 +2,8 @@ package model
 
 import (
 	"context"
+	"database/sql"
+	"fmt"
 
 	"github.com/Masterminds/squirrel"
 	"github.com/zeromicro/go-zero/core/stores/cache"
@@ -17,6 +19,7 @@ type (
 		productModel
 		FindPageListByPage(ctx context.Context, builder squirrel.SelectBuilder, page, pageSize int64, orderBy string) ([]*Product, error)
 		SelectBuilder() squirrel.SelectBuilder
+		TxAdjustStock(ctx context.Context, tx *sql.Tx, id int64, delta int) (sql.Result, error)
 	}
 
 	customProductModel struct {
@@ -62,4 +65,13 @@ func (m *defaultProductModel) FindPageListByPage(ctx context.Context, builder sq
 	default:
 		return nil, err
 	}
+}
+
+func (m *defaultProductModel) TxAdjustStock(ctx context.Context, tx *sql.Tx, id int64, delta int) (sql.Result, error) {
+	productIdKey := fmt.Sprintf("%s%v", cacheGozeroMallProductIdPrefix, id)
+	return m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set stock=stock+? where stock >= -? and id=?", m.table)
+		return tx.ExecContext(ctx, query, delta, delta, id)
+	}, productIdKey)
+
 }

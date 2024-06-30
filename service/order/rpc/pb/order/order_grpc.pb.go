@@ -19,13 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Ordersrv_AddOrder_FullMethodName     = "/order.ordersrv/AddOrder"
-	Ordersrv_UpdateOrder_FullMethodName  = "/order.ordersrv/UpdateOrder"
-	Ordersrv_DelOrder_FullMethodName     = "/order.ordersrv/DelOrder"
-	Ordersrv_GetOrderById_FullMethodName = "/order.ordersrv/GetOrderById"
-	Ordersrv_SearchOrder_FullMethodName  = "/order.ordersrv/SearchOrder"
-	Ordersrv_ListOrder_FullMethodName    = "/order.ordersrv/ListOrder"
-	Ordersrv_PaidOrder_FullMethodName    = "/order.ordersrv/PaidOrder"
+	Ordersrv_AddOrder_FullMethodName       = "/order.ordersrv/AddOrder"
+	Ordersrv_AddOrderRevert_FullMethodName = "/order.ordersrv/AddOrderRevert"
+	Ordersrv_UpdateOrder_FullMethodName    = "/order.ordersrv/UpdateOrder"
+	Ordersrv_DelOrder_FullMethodName       = "/order.ordersrv/DelOrder"
+	Ordersrv_GetOrderById_FullMethodName   = "/order.ordersrv/GetOrderById"
+	Ordersrv_SearchOrder_FullMethodName    = "/order.ordersrv/SearchOrder"
+	Ordersrv_ListOrder_FullMethodName      = "/order.ordersrv/ListOrder"
+	Ordersrv_PaidOrder_FullMethodName      = "/order.ordersrv/PaidOrder"
 )
 
 // OrdersrvClient is the client API for Ordersrv service.
@@ -34,6 +35,7 @@ const (
 type OrdersrvClient interface {
 	// -----------------------order-----------------------
 	AddOrder(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error)
+	AddOrderRevert(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error)
 	UpdateOrder(ctx context.Context, in *UpdateOrderReq, opts ...grpc.CallOption) (*UpdateOrderResp, error)
 	DelOrder(ctx context.Context, in *DelOrderReq, opts ...grpc.CallOption) (*DelOrderResp, error)
 	GetOrderById(ctx context.Context, in *GetOrderByIdReq, opts ...grpc.CallOption) (*GetOrderByIdResp, error)
@@ -53,6 +55,15 @@ func NewOrdersrvClient(cc grpc.ClientConnInterface) OrdersrvClient {
 func (c *ordersrvClient) AddOrder(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error) {
 	out := new(AddOrderResp)
 	err := c.cc.Invoke(ctx, Ordersrv_AddOrder_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ordersrvClient) AddOrderRevert(ctx context.Context, in *AddOrderReq, opts ...grpc.CallOption) (*AddOrderResp, error) {
+	out := new(AddOrderResp)
+	err := c.cc.Invoke(ctx, Ordersrv_AddOrderRevert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -119,6 +130,7 @@ func (c *ordersrvClient) PaidOrder(ctx context.Context, in *PaidReq, opts ...grp
 type OrdersrvServer interface {
 	// -----------------------order-----------------------
 	AddOrder(context.Context, *AddOrderReq) (*AddOrderResp, error)
+	AddOrderRevert(context.Context, *AddOrderReq) (*AddOrderResp, error)
 	UpdateOrder(context.Context, *UpdateOrderReq) (*UpdateOrderResp, error)
 	DelOrder(context.Context, *DelOrderReq) (*DelOrderResp, error)
 	GetOrderById(context.Context, *GetOrderByIdReq) (*GetOrderByIdResp, error)
@@ -134,6 +146,9 @@ type UnimplementedOrdersrvServer struct {
 
 func (UnimplementedOrdersrvServer) AddOrder(context.Context, *AddOrderReq) (*AddOrderResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOrder not implemented")
+}
+func (UnimplementedOrdersrvServer) AddOrderRevert(context.Context, *AddOrderReq) (*AddOrderResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderRevert not implemented")
 }
 func (UnimplementedOrdersrvServer) UpdateOrder(context.Context, *UpdateOrderReq) (*UpdateOrderResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrder not implemented")
@@ -180,6 +195,24 @@ func _Ordersrv_AddOrder_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrdersrvServer).AddOrder(ctx, req.(*AddOrderReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ordersrv_AddOrderRevert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrdersrvServer).AddOrderRevert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Ordersrv_AddOrderRevert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrdersrvServer).AddOrderRevert(ctx, req.(*AddOrderReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -302,6 +335,10 @@ var Ordersrv_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddOrder",
 			Handler:    _Ordersrv_AddOrder_Handler,
+		},
+		{
+			MethodName: "AddOrderRevert",
+			Handler:    _Ordersrv_AddOrderRevert_Handler,
 		},
 		{
 			MethodName: "UpdateOrder",
